@@ -22,6 +22,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    dataBinding {
+        enabled = true
+    }
+
+    packagingOptions {
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/notice.txt'
+    }
 }
 
 dependencies {
@@ -37,9 +46,24 @@ dependencies {
     // Android annotations
     implementation "org.androidannotations:androidannotations-api:4.4.0"
     annotationProcessor "org.androidannotations:androidannotations:4.4.0"
+    implementation "org.androidannotations:rest-spring-api:4.4.0"
+    annotationProcessor "org.androidannotations:rest-spring:4.4.0"
+
+    // Spring REST
+    implementation 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
+
+    // Gson
+    implementation 'com.google.code.gson:gson:2.8.5'
 
     // Architecture components
     implementation "android.arch.lifecycle:extensions:1.1.1"
+
+    // Exo Player
+    implementation "com.google.android.exoplayer:exoplayer-core:2.7.1"
+    implementation "com.google.android.exoplayer:exoplayer-ui:2.7.1"
+
+    // Picasso
+    implementation "com.squareup.picasso:picasso:2.5.2"
 
     testImplementation "junit:junit:4.12"
     testImplementation "android.arch.core:core-testing:1.1.1"

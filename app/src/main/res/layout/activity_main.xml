@@ -8,10 +8,10 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="pl.karollisiewicz.baking.app.ui.MainFragment_"
+        android:name="pl.karollisiewicz.baking.app.ui.RecipesFragment_"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_recipes" />
 
 </android.support.design.widget.CoordinatorLayout>
