@@ -1,4 +1,4 @@
-package pl.karollisiewicz.baking.app.ui;
+package pl.karollisiewicz.baking.app.ui.recipe.list;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
@@ -20,7 +20,8 @@ import org.androidannotations.annotations.ViewById;
 import java.util.List;
 
 import pl.karollisiewicz.baking.R;
-import pl.karollisiewicz.baking.app.ui.lifecycle.RecipesViewModel;
+import pl.karollisiewicz.baking.app.ui.lifecycle.RecipeDetailsViewModel;
+import pl.karollisiewicz.baking.app.ui.lifecycle.RecipesListViewModel;
 import pl.karollisiewicz.baking.app.ui.lifecycle.ViewModelFactory;
 import pl.karollisiewicz.baking.domain.Recipe;
 
@@ -45,7 +46,9 @@ public class RecipesFragment extends Fragment {
     @Bean
     ViewModelFactory viewModelFactory;
 
-    RecipesViewModel recipesViewModel;
+    private RecipesListViewModel recipesListViewModel;
+
+    private RecipeDetailsViewModel recipeDetailsViewModel;
 
     public RecipesFragment() {
         // Required empty public constructor
@@ -54,17 +57,20 @@ public class RecipesFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        recipesViewModel = ViewModelProviders.of(getActivity(), viewModelFactory)
-                .get(RecipesViewModel.class);
+        recipesListViewModel = ViewModelProviders.of(getActivity(), viewModelFactory)
+                .get(RecipesListViewModel.class);
+        recipeDetailsViewModel = ViewModelProviders.of(getActivity(), viewModelFactory)
+                .get(RecipeDetailsViewModel.class);
     }
 
     @AfterViews
     void onViewInjected() {
+        adapter.setRecipeClickListener(recipe -> recipeDetailsViewModel.select(recipe));
         recipesList.setAdapter(adapter);
         recipesList.setHasFixedSize(true);
         recipesList.setLayoutManager(new LinearLayoutManager(getActivity(), VERTICAL, false));
         refreshLayout.setOnRefreshListener(this::fetchRecipes);
-        recipesViewModel.getRecipes().observe(this, it -> {
+        recipesListViewModel.getRecipes().observe(this, it -> {
             if (it == null) return;
             showRecipes(it.getRecipes());
         });
@@ -74,7 +80,7 @@ public class RecipesFragment extends Fragment {
 
     @Background
     void fetchRecipes() {
-        recipesViewModel.fetchRecipes();
+        recipesListViewModel.fetchRecipes();
     }
 
     @UiThread

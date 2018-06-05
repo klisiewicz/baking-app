@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/fragment"
-        android:name="pl.karollisiewicz.baking.app.ui.RecipesFragment_"
+        android:name="pl.karollisiewicz.baking.app.ui.recipe.list.RecipesFragment_"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"

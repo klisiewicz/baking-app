@@ -1,4 +1,4 @@
-package pl.karollisiewicz.baking.app.ui;
+package pl.karollisiewicz.baking.app.ui.recipe.list;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -43,7 +43,6 @@ public class RecipeView extends LinearLayout {
     public RecipeView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-        setOrientation(HORIZONTAL);
     }
 
     public void bind(@NonNull final Recipe recipe) {
