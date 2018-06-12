@@ -27,7 +27,7 @@ public final class Ingredient {
         return measure;
     }
 
-    enum Measure {
+    public enum Measure {
         CUP, TABLESPOON, TEASPOON, KILOGRAM, GRAM, OUNCE, UNIT, UNDEFINED
     }
 }

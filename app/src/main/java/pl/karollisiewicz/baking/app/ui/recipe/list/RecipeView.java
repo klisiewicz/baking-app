@@ -43,6 +43,7 @@ public class RecipeView extends LinearLayout {
     public RecipeView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
+        setClickable(true);
     }
 
     public void bind(@NonNull final Recipe recipe) {
