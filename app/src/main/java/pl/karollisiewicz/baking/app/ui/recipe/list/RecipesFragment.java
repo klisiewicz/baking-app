@@ -68,7 +68,7 @@ public class RecipesFragment extends BaseFragment {
     @AfterViews
     void onViewInjected() {
         setupActionBar(ActionBarBuilder.withView(R.id.toolbar)
-                .setTitle(getString(R.string.app_name))
+                .setTitle(getString(R.string.recipes))
         );
 
         adapter.setRecipeClickListener(recipe -> {

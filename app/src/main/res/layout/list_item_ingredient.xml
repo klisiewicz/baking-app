@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:src="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/ingredient_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        src:layout_constraintBottom_toBottomOf="parent"
+        src:layout_constraintLeft_toLeftOf="parent"
+        src:layout_constraintRight_toLeftOf="@id/ingredient_amount"
+        src:layout_constraintTop_toTopOf="parent"
+        tools:text="Zmielone bycze jądra" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/ingredient_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_small"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        src:layout_constraintBottom_toBottomOf="parent"
+        src:layout_constraintLeft_toRightOf="@id/ingredient_name"
+        src:layout_constraintRight_toLeftOf="@id/ingredient_unit"
+        src:layout_constraintTop_toTopOf="parent"
+        tools:text="8" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/ingredient_unit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+        src:layout_constraintBottom_toBottomOf="parent"
+        src:layout_constraintLeft_toRightOf="@id/ingredient_amount"
+        src:layout_constraintRight_toRightOf="parent"
+        src:layout_constraintTop_toTopOf="parent"
+        tools:text="sztuk" />
+
+    <include
+        layout="@layout/list_item_divider"
+        src:layout_constraintBottom_toBottomOf="parent"
+        src:layout_constraintLeft_toLeftOf="parent"
+        src:layout_constraintLeft_toRightOf="parent"
+        src:layout_constraintTop_toBottomOf="@id/ingredient_name" />
+
+</android.support.constraint.ConstraintLayout>

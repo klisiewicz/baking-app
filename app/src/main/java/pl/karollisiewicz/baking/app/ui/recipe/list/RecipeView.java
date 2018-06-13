@@ -20,7 +20,7 @@ import pl.karollisiewicz.baking.domain.Recipe;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-@EViewGroup(R.layout.recipe_list_item)
+@EViewGroup(R.layout.list_item_recipe)
 public class RecipeView extends LinearLayout {
 
     @ViewById(value = R.id.recipe_thumbnail)

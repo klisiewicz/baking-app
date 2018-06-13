@@ -1,4 +1,4 @@
-package pl.karollisiewicz.baking.app.ui.recipe.step;
+package pl.karollisiewicz.baking.app.ui.recipe.details.step;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
