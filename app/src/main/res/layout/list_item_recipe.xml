@@ -27,7 +27,7 @@
             android:layout_gravity="center_vertical"
             android:layout_margin="@dimen/spacing_small"
             android:layout_weight="1"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
             src:text="Zupa z trupa" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
             src:text="8" />
 
         <android.support.v7.widget.AppCompatImageView

@@ -61,7 +61,7 @@ public class RecipesFragment extends BaseFragment {
         super.onCreate(savedInstanceState);
         recipesListViewModel = ViewModelProviders.of(getAppCompatActivity(), viewModelFactory)
                 .get(RecipesListViewModel.class);
-        recipeDetailsViewModel = ViewModelProviders.of(getAppCompatActivity(), viewModelFactory)
+        recipeDetailsViewModel = recipeDetailsViewModel = ViewModelProviders.of(getAppCompatActivity(), viewModelFactory)
                 .get(RecipeDetailsViewModel.class);
     }
 
