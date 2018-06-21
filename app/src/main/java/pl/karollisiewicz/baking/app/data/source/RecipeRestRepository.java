@@ -38,6 +38,9 @@ public class RecipeRestRepository implements RecipeRepository {
     }
 
     private Ingredient toDomain(@NonNull final RecipeIngredientDto ingredient) {
-        return new Ingredient(ingredient.getIngredient(), ingredient.getQuantity(), Ingredient.Measure.UNDEFINED);
+        return new Ingredient(ingredient.getIngredient(),
+                ingredient.getQuantity(),
+                Ingredient.Measure.fromString(ingredient.getMeasure())
+        );
     }
 }

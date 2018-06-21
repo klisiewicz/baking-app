@@ -1,6 +1,11 @@
 package pl.karollisiewicz.baking.domain;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import pl.karollisiewicz.common.collection.CollectionUtils;
+
+import static java.util.Arrays.asList;
 
 public final class Ingredient {
     private final String name;
@@ -28,6 +33,24 @@ public final class Ingredient {
     }
 
     public enum Measure {
-        CUP, TABLESPOON, TEASPOON, KILOGRAM, GRAM, OUNCE, UNIT, UNDEFINED
+        CUP("CUP"),
+        TABLESPOON("TBLSP"),
+        TEASPOON("TSP"),
+        KILOGRAM("K"),
+        GRAM("G"),
+        OUNCE("OZ"),
+        UNIT("UNIT"),
+        UNDEFINED("UNDEF");
+
+        private final String shortName;
+
+        Measure(final String shortName) {
+            this.shortName = shortName;
+        }
+
+        public static Measure fromString(@Nullable final String shortName) {
+            final Measure measure = CollectionUtils.find(asList(Measure.values()), it -> it.shortName.equals(shortName));
+            return measure != null ? measure : Measure.UNDEFINED;
+        }
     }
 }

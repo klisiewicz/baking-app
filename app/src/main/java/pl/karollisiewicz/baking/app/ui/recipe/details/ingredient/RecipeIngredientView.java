@@ -41,8 +41,7 @@ class RecipeIngredientView extends LinearLayout {
         amount.setText(viewModel.amount);
         unit.setText(viewModel.unit);
     }
-
-
+    
     static class Model {
         private final String name;
         private final String amount;

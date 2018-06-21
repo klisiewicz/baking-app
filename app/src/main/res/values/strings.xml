@@ -11,4 +11,5 @@
     <string name="measure_gram">gram</string>
     <string name="measure_ounce">ounce</string>
     <string name="measure_unit">unit</string>
+    <string name="measure_undefined">undefined</string>
 </resources>
