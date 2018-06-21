@@ -17,6 +17,11 @@ public abstract class RecyclerViewAdapterBase<T, V extends View> extends Recycle
         return items.size();
     }
 
+    public void setItems(@NonNull final List<T> items) {
+        this.items = items;
+        notifyDataSetChanged();
+    }
+
     @Override
     public final ViewWrapper<V> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewWrapper<>(onCreateItemView(parent, viewType));

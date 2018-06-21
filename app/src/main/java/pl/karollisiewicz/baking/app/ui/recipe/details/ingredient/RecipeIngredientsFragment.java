@@ -11,7 +11,6 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import pl.karollisiewicz.baking.R;
@@ -22,6 +21,7 @@ import pl.karollisiewicz.baking.domain.Recipe;
 import pl.karollisiewicz.common.collection.CollectionUtils;
 
 import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
+import static java.util.Collections.emptyList;
 
 @EFragment(R.layout.fragment_recipe_ingredients)
 public class RecipeIngredientsFragment extends Fragment {
@@ -49,6 +49,6 @@ public class RecipeIngredientsFragment extends Fragment {
                 .get(RecipeDetailsViewModel.class);
 
         final Recipe value = recipeDetailsViewModel.getSelected().getValue();
-        return (value != null) ? new ArrayList<>(CollectionUtils.from(value.getIngredients())) : Collections.emptyList();
+        return (value != null) ? new ArrayList<>(CollectionUtils.from(value.getIngredients())) : emptyList();
     }
 }

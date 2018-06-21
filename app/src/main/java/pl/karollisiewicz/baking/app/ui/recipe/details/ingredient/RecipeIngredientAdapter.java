@@ -8,8 +8,6 @@ import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
-import java.util.List;
-
 import pl.karollisiewicz.baking.app.ui.recipe.details.step.MeasureNameProvider;
 import pl.karollisiewicz.baking.domain.Ingredient;
 import pl.karollisiewicz.common.ui.RecyclerViewAdapterBase;
@@ -43,10 +41,5 @@ public class RecipeIngredientAdapter extends RecyclerViewAdapterBase<Ingredient,
 
     private static String capitalizeFirstLetter(String str) {
         return str.substring(0, 1).toUpperCase() + str.substring(1);
-    }
-
-    public void setItems(@NonNull final List<Ingredient> items) {
-        this.items = items;
-        notifyDataSetChanged();
     }
 }

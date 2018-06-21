@@ -4,18 +4,19 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 public final class RecipeStep {
+    private final int ordinal;
     private final Description description;
     private final ResourceLocation resource;
 
-    private RecipeStep(@NonNull final Description description,
-                       @NonNull final ResourceLocation resource) {
-        this.description = description;
-        this.resource = resource;
-    }
 
     private RecipeStep(@NonNull final Builder builder) {
+        this.ordinal = builder.ordinal;
         description = new Description(builder.shortDescription, builder.fullDescription);
         resource = new ResourceLocation(builder.videoUrl, builder.thumbnailUrl);
+    }
+
+    public int getOrdinal() {
+        return ordinal;
     }
 
     @NonNull
@@ -48,12 +49,12 @@ public final class RecipeStep {
         }
 
         @NonNull
-        public String getBrief() {
+        String getBrief() {
             return brief;
         }
 
         @NonNull
-        public String getFull() {
+        String getFull() {
             return full;
         }
     }
@@ -62,32 +63,41 @@ public final class RecipeStep {
         private final String video;
         private final String thumbnail;
 
-        public ResourceLocation(@Nullable final String video, @Nullable final String thumbnail) {
+        ResourceLocation(@Nullable final String video, @Nullable final String thumbnail) {
             this.video = video;
             this.thumbnail = thumbnail;
         }
 
         @Nullable
-        public String getVideo() {
+        String getVideo() {
             return video;
         }
 
         @Nullable
-        public String getThumbnail() {
+        String getThumbnail() {
             return thumbnail;
         }
     }
 
     public static final class Builder {
-        private final String shortDescription;
-        private final String fullDescription;
+        private final int ordinal;
+        private String shortDescription;
+        private String fullDescription;
         private String videoUrl;
         private String thumbnailUrl;
 
-        private Builder(@NonNull final String shortDescription,
-                        @NonNull final String fullDescription) {
+        private Builder(int ordinal) {
+            this.ordinal = ordinal;
+        }
+
+        public Builder setShortDescription(String shortDescription) {
             this.shortDescription = shortDescription;
+            return this;
+        }
+
+        public Builder setFullDescription(String fullDescription) {
             this.fullDescription = fullDescription;
+            return this;
         }
 
         public Builder setVideoUrl(String videoUrl) {
@@ -104,10 +114,8 @@ public final class RecipeStep {
             return new RecipeStep(this);
         }
 
-        public static Builder withDescription(@NonNull final String shortDescription,
-                                              @NonNull final String fullDescription) {
-            return new Builder(shortDescription, fullDescription);
+        public static Builder withOrdinalNumber(int ordinal) {
+            return new Builder(ordinal);
         }
-
     }
 }

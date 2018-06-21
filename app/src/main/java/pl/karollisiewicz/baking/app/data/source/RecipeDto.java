@@ -1,6 +1,7 @@
 package pl.karollisiewicz.baking.app.data.source;
 
 import java.util.Collection;
+import java.util.List;
 
 public class RecipeDto {
     private int id;
@@ -8,7 +9,7 @@ public class RecipeDto {
     private String servings;
     private String image;
     private Collection<RecipeIngredientDto> ingredients;
-    private Collection<RecipeStepDto> steps;
+    private List<RecipeStepDto> steps;
 
     public int getId() {
         return id;
@@ -50,11 +51,11 @@ public class RecipeDto {
         this.ingredients = ingredients;
     }
 
-    public Collection<RecipeStepDto> getSteps() {
+    public List<RecipeStepDto> getSteps() {
         return steps;
     }
 
-    public void setSteps(Collection<RecipeStepDto> steps) {
+    public void setSteps(List<RecipeStepDto> steps) {
         this.steps = steps;
     }
 }
