@@ -3,7 +3,7 @@
     xmlns:src="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/row_height">
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/ingredient_name"
@@ -43,9 +43,8 @@
 
     <include
         layout="@layout/list_item_divider"
-        src:layout_constraintBottom_toBottomOf="parent"
-        src:layout_constraintLeft_toLeftOf="parent"
-        src:layout_constraintLeft_toRightOf="parent"
-        src:layout_constraintTop_toBottomOf="@id/ingredient_name" />
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        src:layout_constraintBottom_toBottomOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

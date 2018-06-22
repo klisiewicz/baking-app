@@ -26,6 +26,10 @@ public class RecipeStepAdapter extends RecyclerViewAdapterBase<RecipeStep, Recip
     public void onBindViewHolder(@NonNull ViewWrapper<RecipeStepView> holder, int position) {
         final RecipeStepView recipeStepView = holder.getView();
         final RecipeStep step = items.get(position);
-        recipeStepView.bind(step.getShortDesription());
+
+        recipeStepView.bind(new RecipeStepView.Model(
+                String.valueOf(step.getOrdinal()) + ".",
+                step.getShortDesription()
+        ));
     }
 }

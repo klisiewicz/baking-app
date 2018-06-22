@@ -15,6 +15,9 @@ import pl.karollisiewicz.baking.R;
 @EViewGroup(R.layout.list_item_recipe_step)
 public class RecipeStepView extends LinearLayout {
 
+    @ViewById(R.id.step_ordinal)
+    AppCompatTextView ordinal;
+
     @ViewById(R.id.step_name)
     AppCompatTextView name;
 
@@ -30,7 +33,18 @@ public class RecipeStepView extends LinearLayout {
         super(context, attrs, defStyleAttr);
     }
 
-    void bind(@NonNull final String description) {
-        name.setText(description);
+    void bind(@NonNull final Model model) {
+        ordinal.setText(model.ordinal);
+        name.setText(model.name);
+    }
+
+    static final class Model {
+        private final String ordinal;
+        private final String name;
+
+        public Model(String ordinal, String name) {
+            this.ordinal = ordinal;
+            this.name = name;
+        }
     }
 }
