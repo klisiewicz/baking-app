@@ -41,7 +41,7 @@ dependencies {
     implementation "com.android.support:support-v4:27.1.1"
     implementation "com.android.support:design:27.1.1"
     implementation "com.android.support:recyclerview-v7:27.1.1"
-    implementation "com.android.support.constraint:constraint-layout:1.1.0"
+    implementation "com.android.support.constraint:constraint-layout:1.1.2"
 
     // Android annotations
     implementation "org.androidannotations:androidannotations-api:4.4.0"
@@ -64,6 +64,9 @@ dependencies {
 
     // Picasso
     implementation "com.squareup.picasso:picasso:2.5.2"
+
+    // Fragment navigation
+    implementation 'com.ncapdevi:frag-nav:2.4.0'
 
     testImplementation "junit:junit:4.12"
     testImplementation "android.arch.core:core-testing:1.1.1"

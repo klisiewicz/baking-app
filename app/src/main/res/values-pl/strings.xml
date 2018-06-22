@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Przepisy</string>
+    <string name="recipes">Przepisy</string>
+    <string name="ingredients">Składniki</string>
+    <string name="steps">Kroki</string>
+    <string name="measure_cup">szklanka</string>
+    <string name="measure_tablespoon">łyżka</string>
+    <string name="measure_teaspoon">łyżeczka</string>
+    <string name="measure_kilogram">kilogram</string>
+    <string name="measure_gram">gram</string>
+    <string name="measure_ounce">uncja</string>
+    <string name="measure_unit">jednostka</string>
+    <string name="measure_undefined">nieznana</string>
+</resources>

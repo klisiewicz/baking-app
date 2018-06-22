@@ -1,4 +1,4 @@
-package pl.karollisiewicz.baking.app.ui;
+package pl.karollisiewicz.baking.app.ui.recipe.list;
 
 import java.util.List;
 

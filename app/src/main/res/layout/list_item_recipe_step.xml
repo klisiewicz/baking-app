@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:src="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/row_height">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/step_ordinal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        src:layout_constraintBottom_toBottomOf="parent"
+        src:layout_constraintLeft_toLeftOf="parent"
+        src:layout_constraintRight_toLeftOf="@id/step_name"
+        src:layout_constraintTop_toTopOf="parent"
+        tools:text="1." />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/step_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_small"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+        src:layout_constraintLeft_toRightOf="@id/step_ordinal"
+        src:layout_constraintBottom_toBottomOf="parent"
+        src:layout_constraintRight_toLeftOf="@id/step_arrow"
+        src:layout_constraintTop_toTopOf="parent"
+        tools:text="Dobrz zmiel bycze jajeczka" />
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/step_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_small"
+        android:src="@drawable/ic_chevron_right"
+        src:layout_constraintBottom_toBottomOf="parent"
+        src:layout_constraintLeft_toRightOf="@id/step_name"
+        src:layout_constraintRight_toRightOf="parent"
+        src:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        layout="@layout/list_item_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        src:layout_constraintBottom_toBottomOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

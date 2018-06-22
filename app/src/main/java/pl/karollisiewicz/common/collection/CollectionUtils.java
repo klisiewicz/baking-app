@@ -1,6 +1,7 @@
 package pl.karollisiewicz.common.collection;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -13,12 +14,19 @@ public final class CollectionUtils {
         // No instances should be crated.
     }
 
+    @Nullable
+    public static <E> E find(Collection<E> collection, Predicate<? super E> predicate) {
+        for (E element: collection)
+            if (predicate.test(element))
+                return element;
+        return null;
+    }
+
     public static <E> Collection<E> filter(Collection<E> unfiltered, Predicate<? super E> predicate) {
         final Collection<E> filtered = new ArrayList<>();
         for (E element: unfiltered)
             if (predicate.test(element))
                 filtered.add(element);
-
         return  filtered;
     }
 

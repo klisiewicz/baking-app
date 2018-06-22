@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:src="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/spacing_small"
+        android:paddingStart="@dimen/spacing_small">
+
+        <android.support.v7.widget.AppCompatImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/recipe_thumbnail"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_cupcake" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/recipe_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="@dimen/spacing_small"
+            android:layout_weight="1"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body2"
+            src:text="Zupa z trupa" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/recipe_serving"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Body1"
+            src:text="8" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/recipe_serving_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_margin="@dimen/spacing_small"
+            app:srcCompat="@drawable/ic_restaurant" />
+    </LinearLayout>
+
+    <include layout="@layout/list_item_divider" />
+
+</LinearLayout>

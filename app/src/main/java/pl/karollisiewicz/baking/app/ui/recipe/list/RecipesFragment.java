@@ -1,10 +1,9 @@
-package pl.karollisiewicz.baking.app.ui;
+package pl.karollisiewicz.baking.app.ui.recipe.list;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,15 +19,19 @@ import org.androidannotations.annotations.ViewById;
 import java.util.List;
 
 import pl.karollisiewicz.baking.R;
-import pl.karollisiewicz.baking.app.ui.lifecycle.RecipesViewModel;
+import pl.karollisiewicz.baking.app.ui.lifecycle.RecipeDetailsViewModel;
+import pl.karollisiewicz.baking.app.ui.lifecycle.RecipesListViewModel;
 import pl.karollisiewicz.baking.app.ui.lifecycle.ViewModelFactory;
+import pl.karollisiewicz.baking.app.ui.navigation.BaseFragment;
+import pl.karollisiewicz.baking.app.ui.recipe.details.RecipeFragment_;
 import pl.karollisiewicz.baking.domain.Recipe;
+import pl.karollisiewicz.common.ui.ActionBarBuilder;
 
 import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 import static android.view.View.GONE;
 
 @EFragment(R.layout.fragment_recipes)
-public class RecipesFragment extends Fragment {
+public class RecipesFragment extends BaseFragment {
 
     @ViewById
     ProgressBar progress;
@@ -45,7 +48,9 @@ public class RecipesFragment extends Fragment {
     @Bean
     ViewModelFactory viewModelFactory;
 
-    RecipesViewModel recipesViewModel;
+    private RecipesListViewModel recipesListViewModel;
+
+    private RecipeDetailsViewModel recipeDetailsViewModel;
 
     public RecipesFragment() {
         // Required empty public constructor
@@ -54,17 +59,27 @@ public class RecipesFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        recipesViewModel = ViewModelProviders.of(getActivity(), viewModelFactory)
-                .get(RecipesViewModel.class);
+        recipesListViewModel = ViewModelProviders.of(getAppCompatActivity(), viewModelFactory)
+                .get(RecipesListViewModel.class);
+        recipeDetailsViewModel = recipeDetailsViewModel = ViewModelProviders.of(getAppCompatActivity(), viewModelFactory)
+                .get(RecipeDetailsViewModel.class);
     }
 
     @AfterViews
     void onViewInjected() {
+        setupActionBar(ActionBarBuilder.withView(R.id.toolbar)
+                .setTitle(getString(R.string.recipes))
+        );
+
+        adapter.setRecipeClickListener(recipe -> {
+            recipeDetailsViewModel.select(recipe);
+            navigateTo(new RecipeFragment_());
+        });
         recipesList.setAdapter(adapter);
         recipesList.setHasFixedSize(true);
         recipesList.setLayoutManager(new LinearLayoutManager(getActivity(), VERTICAL, false));
         refreshLayout.setOnRefreshListener(this::fetchRecipes);
-        recipesViewModel.getRecipes().observe(this, it -> {
+        recipesListViewModel.getRecipes().observe(this, it -> {
             if (it == null) return;
             showRecipes(it.getRecipes());
         });
@@ -74,7 +89,7 @@ public class RecipesFragment extends Fragment {
 
     @Background
     void fetchRecipes() {
-        recipesViewModel.fetchRecipes();
+        recipesListViewModel.fetchRecipes();
     }
 
     @UiThread

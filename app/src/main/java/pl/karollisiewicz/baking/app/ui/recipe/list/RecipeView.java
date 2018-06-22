@@ -1,4 +1,4 @@
-package pl.karollisiewicz.baking.app.ui;
+package pl.karollisiewicz.baking.app.ui.recipe.list;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -20,7 +20,7 @@ import pl.karollisiewicz.baking.domain.Recipe;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-@EViewGroup(R.layout.recipe_list_item)
+@EViewGroup(R.layout.list_item_recipe)
 public class RecipeView extends LinearLayout {
 
     @ViewById(value = R.id.recipe_thumbnail)
@@ -43,7 +43,7 @@ public class RecipeView extends LinearLayout {
     public RecipeView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         setLayoutParams(new LayoutParams(MATCH_PARENT, WRAP_CONTENT));
-        setOrientation(HORIZONTAL);
+        setClickable(true);
     }
 
     public void bind(@NonNull final Recipe recipe) {

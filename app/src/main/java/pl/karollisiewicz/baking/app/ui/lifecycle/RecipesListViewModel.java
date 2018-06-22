@@ -8,13 +8,13 @@ import org.androidannotations.annotations.EBean;
 
 import java.util.ArrayList;
 
-import pl.karollisiewicz.baking.app.ui.RecipesViewState;
+import pl.karollisiewicz.baking.app.ui.recipe.list.RecipesViewState;
 import pl.karollisiewicz.baking.domain.Recipe;
 import pl.karollisiewicz.baking.domain.RecipeRepository;
 import pl.karollisiewicz.common.collection.CollectionUtils;
 
 @EBean
-public class RecipesViewModel extends ViewModel {
+public class RecipesListViewModel extends ViewModel {
 
     RecipeRepository recipeRepository;
 
