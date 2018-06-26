@@ -11,11 +11,11 @@ import com.ncapdevi.fragnav.FragNavController;
 import org.androidannotations.annotations.EActivity;
 
 import pl.karollisiewicz.baking.R;
-import pl.karollisiewicz.baking.app.ui.navigation.FragmentNavigation;
+import pl.karollisiewicz.baking.app.ui.navigation.FragmentNavigator;
 import pl.karollisiewicz.baking.app.ui.recipe.list.RecipesFragment_;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity implements FragmentNavigation {
+public class MainActivity extends AppCompatActivity implements FragmentNavigator {
 
     private FragNavController navController;
 
@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigatio
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         navController = FragNavController.newBuilder(savedInstanceState, getSupportFragmentManager(), R.id.main_layout)
-                .rootFragment(new RecipesFragment_())
+                .rootFragment(RecipesFragment_.builder().build())
                 .build();
     }
 
@@ -40,10 +40,13 @@ public class MainActivity extends AppCompatActivity implements FragmentNavigatio
         navController.pushFragment(fragment);
     }
 
+
+
     @Override
     public void onBackPressed() {
-        if (!navController.popFragment()) {
-            super.onBackPressed();
-        }
+        if (navController.isRootFragment()) super.onBackPressed();
+
+        final boolean wasPopped = navController.popFragment();
+        if (!wasPopped) super.onBackPressed();
     }
 }

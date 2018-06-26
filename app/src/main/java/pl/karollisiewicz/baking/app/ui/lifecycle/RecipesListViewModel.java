@@ -19,15 +19,19 @@ public class RecipesListViewModel extends ViewModel {
     RecipeRepository recipeRepository;
 
     private MutableLiveData<RecipesViewState> recipes = new MutableLiveData<>();
+    private boolean wasFetched = false;
 
     public LiveData<RecipesViewState> getRecipes() {
         return recipes;
     }
 
     public void fetchRecipes() {
-        recipes.postValue(RecipesViewState.loading());
+        if (!wasFetched) {
+            recipes.postValue(RecipesViewState.loading());
 
-        final Iterable<Recipe> fetched = recipeRepository.fetchAll();
-        recipes.postValue(RecipesViewState.success(new ArrayList<>(CollectionUtils.from(fetched))));
+            final Iterable<Recipe> fetched = recipeRepository.fetchAll();
+            recipes.postValue(RecipesViewState.success(new ArrayList<>(CollectionUtils.from(fetched))));
+            wasFetched = true;
+        }
     }
 }

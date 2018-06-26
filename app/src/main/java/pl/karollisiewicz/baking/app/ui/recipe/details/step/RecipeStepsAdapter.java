@@ -2,6 +2,7 @@ package pl.karollisiewicz.baking.app.ui.recipe.details.step;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.ViewGroup;
 
 import org.androidannotations.annotations.EBean;
@@ -12,10 +13,18 @@ import pl.karollisiewicz.common.ui.RecyclerViewAdapterBase;
 import pl.karollisiewicz.common.ui.ViewWrapper;
 
 @EBean
-public class RecipeStepAdapter extends RecyclerViewAdapterBase<RecipeStep, RecipeStepView> {
+public class RecipeStepsAdapter extends RecyclerViewAdapterBase<RecipeStep, RecipeStepView> {
+
+    @FunctionalInterface
+    public interface RecipeStepClickListener {
+        void onRecipeStepSelected(final RecipeStep recipeStep);
+    }
 
     @RootContext
     Context context;
+
+    @Nullable
+    private RecipeStepClickListener recipeStepClickListener;
 
     @Override
     protected RecipeStepView onCreateItemView(ViewGroup parent, int viewType) {
@@ -29,7 +38,14 @@ public class RecipeStepAdapter extends RecyclerViewAdapterBase<RecipeStep, Recip
 
         recipeStepView.bind(new RecipeStepView.Model(
                 String.valueOf(step.getOrdinal()) + ".",
-                step.getShortDesription()
+                step.getShortDescription()
         ));
+        recipeStepView.setOnClickListener(v -> {
+            if (recipeStepClickListener != null) recipeStepClickListener.onRecipeStepSelected(step);
+        });
+    }
+
+    public void setRecipeStepClickListener(@Nullable RecipeStepClickListener recipeStepClickListener) {
+        this.recipeStepClickListener = recipeStepClickListener;
     }
 }

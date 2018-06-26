@@ -20,7 +20,7 @@ public final class RecipeStep {
     }
 
     @NonNull
-    public String getShortDesription() {
+    public String getShortDescription() {
         return description.getBrief();
     }
 

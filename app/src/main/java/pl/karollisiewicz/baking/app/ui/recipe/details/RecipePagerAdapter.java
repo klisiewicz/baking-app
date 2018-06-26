@@ -22,8 +22,8 @@ final class RecipePagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        if (position == 0) return new RecipeIngredientsFragment_();
-        else if (position == 1) return new RecipeStepsFragment_();
+        if (position == 0) return RecipeIngredientsFragment_.builder().build();
+        else if (position == 1) return RecipeStepsFragment_.builder().build();
         else throw new IllegalArgumentException(position + " is not a valid position.");
     }
 

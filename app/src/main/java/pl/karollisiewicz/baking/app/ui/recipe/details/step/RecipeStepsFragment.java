@@ -1,7 +1,6 @@
 package pl.karollisiewicz.baking.app.ui.recipe.details.step;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -11,44 +10,46 @@ import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import pl.karollisiewicz.baking.R;
 import pl.karollisiewicz.baking.app.ui.lifecycle.RecipeDetailsViewModel;
-import pl.karollisiewicz.baking.app.ui.lifecycle.ViewModelFactory;
-import pl.karollisiewicz.baking.domain.Recipe;
-import pl.karollisiewicz.baking.domain.RecipeStep;
+import pl.karollisiewicz.baking.app.ui.navigation.NavigationFragment;
+import pl.karollisiewicz.baking.app.ui.recipe.details.step.video.RecipeStepVideoFragment_;
 import pl.karollisiewicz.common.collection.CollectionUtils;
 
 import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 import static java.util.Collections.emptyList;
 
 @EFragment(R.layout.fragment_recipe_steps)
-public class RecipeStepsFragment extends Fragment {
+public class RecipeStepsFragment extends NavigationFragment {
 
     @ViewById(value = R.id.steps_list)
     RecyclerView stepsList;
 
     @Bean
-    RecipeStepAdapter adapter;
-
-    @Bean
-    ViewModelFactory viewModelFactory;
+    RecipeStepsAdapter adapter;
 
     @AfterViews
     void onViewInjected() {
-        adapter.setItems(getSteps());
+        setupStepsList();
+        subscribeForSelection();
+    }
+
+    private void setupStepsList() {
+        adapter.setRecipeStepClickListener(step -> navigateTo(RecipeStepVideoFragment_.builder().build()));
         stepsList.setAdapter(adapter);
         stepsList.setHasFixedSize(true);
         stepsList.setLayoutManager(new LinearLayoutManager(getActivity(), VERTICAL, false));
     }
 
-    public List<RecipeStep> getSteps() {
-        final RecipeDetailsViewModel recipeDetailsViewModel = ViewModelProviders
-                .of(getActivity(), viewModelFactory)
-                .get(pl.karollisiewicz.baking.app.ui.lifecycle.RecipeDetailsViewModel.class);
+    private void subscribeForSelection() {
+        final RecipeDetailsViewModel recipeDetailsViewModel = ViewModelProviders.of(getActivity())
+                .get(RecipeDetailsViewModel.class);
 
-        final Recipe value = recipeDetailsViewModel.getSelected().getValue();
-        return (value != null) ? new ArrayList<>(CollectionUtils.from(value.getSteps())) : emptyList();
+        recipeDetailsViewModel.getSelected()
+                .observe(getViewLifecycleOwner(), it -> {
+                    if (it == null) adapter.setItems(emptyList());
+                    else adapter.setItems(new ArrayList<>(CollectionUtils.from(it.getSteps())));
+                });
     }
 }

@@ -23,9 +23,6 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
             final RecipesListViewModel recipesListViewModel = new RecipesListViewModel();
             recipesListViewModel.recipeRepository = recipeRepository;
             return (T) recipesListViewModel;
-        } else if (modelClass.isAssignableFrom(RecipeDetailsViewModel.class)) {
-            final RecipeDetailsViewModel recipeDetailsViewModel = new RecipeDetailsViewModel();
-            return (T) recipeDetailsViewModel;
         }
         throw new IllegalArgumentException("Unknown ViewModel class");
     }

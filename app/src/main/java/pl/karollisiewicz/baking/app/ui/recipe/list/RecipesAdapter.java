@@ -8,8 +8,6 @@ import android.view.ViewGroup;
 import org.androidannotations.annotations.EBean;
 import org.androidannotations.annotations.RootContext;
 
-import java.util.List;
-
 import pl.karollisiewicz.baking.domain.Recipe;
 import pl.karollisiewicz.common.ui.RecyclerViewAdapterBase;
 import pl.karollisiewicz.common.ui.ViewWrapper;
@@ -41,11 +39,6 @@ public class RecipesAdapter extends RecyclerViewAdapterBase<Recipe, RecipeView> 
         view.setOnClickListener(v -> {
             if (recipeClickListener != null) recipeClickListener.onRecipeSelected(recipe);
         });
-    }
-
-    public void setItems(@NonNull final List<Recipe> items) {
-        this.items = items;
-        notifyDataSetChanged();
     }
 
     public void setRecipeClickListener(@Nullable RecipeClickListener recipeClickListener) {

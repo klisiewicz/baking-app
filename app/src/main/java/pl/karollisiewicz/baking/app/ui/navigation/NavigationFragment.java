@@ -9,21 +9,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import pl.karollisiewicz.baking.app.ui.lifecycle.ViewLifecycleFragment;
 import pl.karollisiewicz.common.ui.ActionBarBuilder;
 
-public class BaseFragment extends Fragment {
+public class NavigationFragment extends ViewLifecycleFragment {
 
-    private FragmentNavigation fragmentNavigation;
+    private FragmentNavigator fragmentNavigator;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof FragmentNavigation)
-            fragmentNavigation = (FragmentNavigation) context;
+        if (context instanceof FragmentNavigator)
+            fragmentNavigator = (FragmentNavigator) context;
     }
 
     protected void navigateTo(@NonNull final Fragment fragment) {
-        fragmentNavigation.push(fragment);
+        fragmentNavigator.push(fragment);
     }
 
     protected void setupActionBar(@NonNull final ActionBarBuilder actionBarBuilder) {
