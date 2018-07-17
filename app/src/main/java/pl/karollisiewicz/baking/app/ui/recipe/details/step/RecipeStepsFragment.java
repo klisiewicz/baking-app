@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import pl.karollisiewicz.baking.R;
 import pl.karollisiewicz.baking.app.ui.lifecycle.RecipeDetailsViewModel;
+import pl.karollisiewicz.baking.app.ui.lifecycle.RecipeStepViewModel;
 import pl.karollisiewicz.baking.app.ui.navigation.NavigationFragment;
 import pl.karollisiewicz.baking.app.ui.recipe.details.step.video.RecipeStepVideoFragment_;
 import pl.karollisiewicz.common.collection.CollectionUtils;
@@ -29,23 +30,33 @@ public class RecipeStepsFragment extends NavigationFragment {
     @Bean
     RecipeStepsAdapter adapter;
 
+    private RecipeDetailsViewModel recipeDetailsViewModel;
+    private RecipeStepViewModel recipeStepViewModel;
+
     @AfterViews
     void onViewInjected() {
+        setupViewModels();
         setupStepsList();
         subscribeForSelection();
     }
 
+    private void setupViewModels() {
+        recipeDetailsViewModel = ViewModelProviders.of(getActivity()).get(RecipeDetailsViewModel.class);
+        recipeStepViewModel = ViewModelProviders.of(getActivity()).get(RecipeStepViewModel.class);
+    }
+
     private void setupStepsList() {
-        adapter.setRecipeStepClickListener(step -> navigateTo(RecipeStepVideoFragment_.builder().build()));
+        adapter.setRecipeStepClickListener(step -> {
+                    recipeStepViewModel.select(step);
+                    navigateTo(RecipeStepVideoFragment_.builder().build());
+                }
+        );
         stepsList.setAdapter(adapter);
         stepsList.setHasFixedSize(true);
         stepsList.setLayoutManager(new LinearLayoutManager(getActivity(), VERTICAL, false));
     }
 
     private void subscribeForSelection() {
-        final RecipeDetailsViewModel recipeDetailsViewModel = ViewModelProviders.of(getActivity())
-                .get(RecipeDetailsViewModel.class);
-
         recipeDetailsViewModel.getSelected()
                 .observe(getViewLifecycleOwner(), it -> {
                     if (it == null) adapter.setItems(emptyList());
