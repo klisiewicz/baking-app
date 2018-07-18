@@ -2,7 +2,6 @@ package pl.karollisiewicz.baking.app.ui.recipe.details.step.video;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.NonNull;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -20,15 +19,14 @@ import org.androidannotations.annotations.ViewById;
 
 import pl.karollisiewicz.baking.R;
 import pl.karollisiewicz.baking.app.ui.lifecycle.RecipeStepViewModel;
-import pl.karollisiewicz.baking.app.ui.navigation.NavigationFragment;
-import pl.karollisiewicz.common.ui.ActionBarBuilder;
+import pl.karollisiewicz.baking.app.ui.lifecycle.ViewLifecycleFragment;
 import pl.karollisiewicz.common.ui.ExoPlayerView;
 
 import static android.text.TextUtils.isEmpty;
 import static pl.karollisiewicz.common.ui.ViewUtil.showViewWhen;
 
 @EFragment(R.layout.fragment_recipe_video)
-public class RecipeStepVideoFragment extends NavigationFragment {
+public class RecipeStepVideoFragment extends ViewLifecycleFragment {
 
     @ViewById(R.id.player)
     ExoPlayerView playerView;
@@ -58,24 +56,14 @@ public class RecipeStepVideoFragment extends NavigationFragment {
     }
 
     private void subscribeForSelection() {
-        final RecipeStepViewModel recipeStepViewModel = ViewModelProviders.of(getAppCompatActivity())
+        final RecipeStepViewModel recipeStepViewModel = ViewModelProviders.of(requireActivity())
                 .get(RecipeStepViewModel.class);
-        recipeStepViewModel.getSelected().observe(getViewLifecycleOwner(), it -> {
-            if (it == null) return;
+        recipeStepViewModel.getSelected().observe(getViewLifecycleOwner(), step -> {
+            if (step == null) return;
 
-            Log.d("RecipeStepVideoFragment", it.getThumbnailUrl());
-
-            setupToolbarWithStepNumber(it.getOrdinal());
-            description.setText(it.getFullDescription());
-            showViewWhen(playerView, !isEmpty(it.getVideoUrl()));
-            playerView.play(it.getVideoUrl());
+            description.setText(step.getFullDescription());
+            showViewWhen(playerView, !isEmpty(step.getVideoUrl()));
+            playerView.play(step.getVideoUrl());
         });
-    }
-
-    private void setupToolbarWithStepNumber(int ordinal) {
-        setupActionBar(ActionBarBuilder.withView(R.id.toolbar)
-                .setTitle(getString(R.string.step_number, ordinal))
-                .setBackClickListener(() -> getAppCompatActivity().onBackPressed())
-        );
     }
 }

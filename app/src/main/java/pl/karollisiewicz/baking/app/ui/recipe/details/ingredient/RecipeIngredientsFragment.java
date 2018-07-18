@@ -37,11 +37,11 @@ public class RecipeIngredientsFragment extends ViewLifecycleFragment {
     private void setupIngredientList() {
         ingredientsList.setAdapter(adapter);
         ingredientsList.setHasFixedSize(true);
-        ingredientsList.setLayoutManager(new LinearLayoutManager(getActivity(), VERTICAL, false));
+        ingredientsList.setLayoutManager(new LinearLayoutManager(requireActivity(), VERTICAL, false));
     }
 
     private void subscribeForSelection() {
-        final RecipeDetailsViewModel recipeDetailsViewModel = ViewModelProviders.of(getActivity())
+        final RecipeDetailsViewModel recipeDetailsViewModel = ViewModelProviders.of(requireActivity())
                 .get(RecipeDetailsViewModel.class);
 
         recipeDetailsViewModel.getSelected().observe(getViewLifecycleOwner(), it -> {

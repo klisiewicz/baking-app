@@ -1,9 +1,10 @@
-package pl.karollisiewicz.baking.app.ui.recipe.details;
+package pl.karollisiewicz.baking.app.ui.recipe.details.step;
 
 import android.arch.lifecycle.ViewModelProviders;
-import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+
+import com.badoualy.stepperindicator.StepperIndicator;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
@@ -14,28 +15,17 @@ import pl.karollisiewicz.baking.app.ui.lifecycle.RecipeDetailsViewModel;
 import pl.karollisiewicz.baking.app.ui.navigation.NavigationFragment;
 import pl.karollisiewicz.common.ui.ActionBarBuilder;
 
-@EFragment(R.layout.fragment_recipe)
-public class RecipeFragment extends NavigationFragment {
-
-    @ViewById(R.id.tab_layout)
-    TabLayout tabLayout;
+@EFragment(R.layout.fragment_recipe_step)
+public class RecipeStepFragment extends NavigationFragment {
 
     @ViewById(R.id.view_pager)
-    ViewPager viewPager;
+    ViewPager pager;
+
+    @ViewById(R.id.indicator)
+    StepperIndicator indicator;
 
     @AfterViews
     void onViewInjected() {
-        setupTabs();
-        subscribeToViewModel();
-    }
-
-    private void setupTabs() {
-        final PagerAdapter adapter = new RecipePagerAdapter(getAppCompatActivity(), getChildFragmentManager());
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
-    }
-
-    private void subscribeToViewModel() {
         final RecipeDetailsViewModel recipeDetailsViewModel = ViewModelProviders.of(getAppCompatActivity())
                 .get(RecipeDetailsViewModel.class);
 
@@ -45,7 +35,19 @@ public class RecipeFragment extends NavigationFragment {
                         .setTitle(recipe.getName())
                         .setBackClickListener(() -> getAppCompatActivity().onBackPressed())
                 );
+
+                final PagerAdapter adapter = new RecipeStepPagerAdapter(getChildFragmentManager(), recipe);
+                pager.setAdapter(adapter);
+//                pager.setCurrentItem(0);
+                indicator.setViewPager(pager);
             }
         });
+    }
+
+    private void setupToolbarWithStepNumber(int ordinal) {
+        setupActionBar(ActionBarBuilder.withView(R.id.toolbar)
+                .setTitle(getString(R.string.step_number, ordinal))
+                .setBackClickListener(() -> getAppCompatActivity().onBackPressed())
+        );
     }
 }

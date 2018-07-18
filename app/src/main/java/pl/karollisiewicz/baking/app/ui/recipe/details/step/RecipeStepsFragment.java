@@ -15,7 +15,6 @@ import pl.karollisiewicz.baking.R;
 import pl.karollisiewicz.baking.app.ui.lifecycle.RecipeDetailsViewModel;
 import pl.karollisiewicz.baking.app.ui.lifecycle.RecipeStepViewModel;
 import pl.karollisiewicz.baking.app.ui.navigation.NavigationFragment;
-import pl.karollisiewicz.baking.app.ui.recipe.details.step.video.RecipeStepVideoFragment_;
 import pl.karollisiewicz.common.collection.CollectionUtils;
 
 import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
@@ -48,7 +47,7 @@ public class RecipeStepsFragment extends NavigationFragment {
     private void setupStepsList() {
         adapter.setRecipeStepClickListener(step -> {
                     recipeStepViewModel.select(step);
-                    navigateTo(RecipeStepVideoFragment_.builder().build());
+                    navigateTo(RecipeStepFragment_.builder().build());
                 }
         );
         stepsList.setAdapter(adapter);

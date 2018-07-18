@@ -8,7 +8,6 @@ public final class RecipeStep {
     private final Description description;
     private final ResourceLocation resource;
 
-
     private RecipeStep(@NonNull final Builder builder) {
         this.ordinal = builder.ordinal;
         description = new Description(builder.shortDescription, builder.fullDescription);

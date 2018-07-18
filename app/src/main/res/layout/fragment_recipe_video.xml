@@ -1,36 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:fillViewport="true">
 
-    <include layout="@layout/toolbar" />
-
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <pl.karollisiewicz.common.ui.ExoPlayerView
+            android:id="@+id/player"
+            android:layout_width="match_parent"
+            android:layout_height="256dp"
+            android:layout_margin="@dimen/spacing_small"
+            android:fitsSystemWindows="false" />
+
+        <com.uncopt.android.widget.text.justify.JustifiedTextView
+            android:id="@+id/recipe_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <pl.karollisiewicz.common.ui.ExoPlayerView
-                android:id="@+id/player"
-                android:layout_width="match_parent"
-                android:layout_height="256dp"
-                android:layout_margin="@dimen/spacing_small"
-                android:fitsSystemWindows="false" />
-
-            <com.uncopt.android.widget.text.justify.JustifiedTextView
-                android:id="@+id/recipe_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_small"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                tools:text="To jest bardzo dobra zupa z bora każdy powinien jej spróbować bo jest bardzo smaczna i zdrowa." />
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+            android:layout_margin="@dimen/spacing_small"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            tools:text="To jest bardzo dobra zupa z bora każdy powinien jej spróbować bo jest bardzo smaczna i zdrowa." />
+    </LinearLayout>
+</ScrollView>
