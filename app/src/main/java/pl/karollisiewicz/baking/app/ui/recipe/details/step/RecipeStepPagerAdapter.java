@@ -19,7 +19,9 @@ public final class RecipeStepPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        return RecipeStepVideoFragment_.builder().build();
+        return RecipeStepVideoFragment_.builder()
+                .recipeStep(recipe.getStepAt(position))
+                .build();
     }
 
     @Override

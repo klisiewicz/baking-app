@@ -3,7 +3,9 @@ package pl.karollisiewicz.baking.domain;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-public final class RecipeStep {
+import java.io.Serializable;
+
+public final class RecipeStep implements Serializable {
     private final int ordinal;
     private final Description description;
     private final ResourceLocation resource;
@@ -38,7 +40,7 @@ public final class RecipeStep {
         return resource.getThumbnail();
     }
 
-    private static final class Description {
+    private static final class Description implements Serializable {
         private final String brief;
         private final String full;
 
@@ -58,7 +60,7 @@ public final class RecipeStep {
         }
     }
 
-    private static final class ResourceLocation {
+    private static final class ResourceLocation implements Serializable {
         private final String video;
         private final String thumbnail;
 

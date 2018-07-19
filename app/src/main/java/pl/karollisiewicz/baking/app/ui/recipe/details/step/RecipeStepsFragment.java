@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 import pl.karollisiewicz.baking.R;
 import pl.karollisiewicz.baking.app.ui.lifecycle.RecipeDetailsViewModel;
-import pl.karollisiewicz.baking.app.ui.lifecycle.RecipeStepViewModel;
 import pl.karollisiewicz.baking.app.ui.navigation.NavigationFragment;
 import pl.karollisiewicz.common.collection.CollectionUtils;
 
@@ -30,7 +29,6 @@ public class RecipeStepsFragment extends NavigationFragment {
     RecipeStepsAdapter adapter;
 
     private RecipeDetailsViewModel recipeDetailsViewModel;
-    private RecipeStepViewModel recipeStepViewModel;
 
     @AfterViews
     void onViewInjected() {
@@ -40,26 +38,26 @@ public class RecipeStepsFragment extends NavigationFragment {
     }
 
     private void setupViewModels() {
-        recipeDetailsViewModel = ViewModelProviders.of(getActivity()).get(RecipeDetailsViewModel.class);
-        recipeStepViewModel = ViewModelProviders.of(getActivity()).get(RecipeStepViewModel.class);
+        recipeDetailsViewModel = ViewModelProviders.of(requireActivity()).get(RecipeDetailsViewModel.class);
     }
 
     private void setupStepsList() {
-        adapter.setRecipeStepClickListener(step -> {
-                    recipeStepViewModel.select(step);
-                    navigateTo(RecipeStepFragment_.builder().build());
-                }
-        );
         stepsList.setAdapter(adapter);
         stepsList.setHasFixedSize(true);
-        stepsList.setLayoutManager(new LinearLayoutManager(getActivity(), VERTICAL, false));
+        stepsList.setLayoutManager(new LinearLayoutManager(requireActivity(), VERTICAL, false));
     }
 
     private void subscribeForSelection() {
         recipeDetailsViewModel.getSelected()
-                .observe(getViewLifecycleOwner(), it -> {
-                    if (it == null) adapter.setItems(emptyList());
-                    else adapter.setItems(new ArrayList<>(CollectionUtils.from(it.getSteps())));
+                .observe(getViewLifecycleOwner(), recipe -> {
+                    if (recipe == null) adapter.setItems(emptyList());
+                    else adapter.setItems(new ArrayList<>(CollectionUtils.from(recipe.getSteps())));
+
+                    adapter.setRecipeStepClickListener((step, position) ->
+                            navigateTo(RecipeStepFragment_.builder()
+                                    .selectedStepNumber(position)
+                                    .build())
+                    );
                 });
     }
 }

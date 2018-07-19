@@ -1,6 +1,5 @@
 package pl.karollisiewicz.baking.app.ui.recipe.details.step.video;
 
-import android.arch.lifecycle.ViewModelProviders;
 import android.support.annotation.NonNull;
 import android.widget.TextView;
 
@@ -15,11 +14,12 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.FragmentArg;
 import org.androidannotations.annotations.ViewById;
 
 import pl.karollisiewicz.baking.R;
-import pl.karollisiewicz.baking.app.ui.lifecycle.RecipeStepViewModel;
 import pl.karollisiewicz.baking.app.ui.lifecycle.ViewLifecycleFragment;
+import pl.karollisiewicz.baking.domain.RecipeStep;
 import pl.karollisiewicz.common.ui.ExoPlayerView;
 
 import static android.text.TextUtils.isEmpty;
@@ -27,6 +27,9 @@ import static pl.karollisiewicz.common.ui.ViewUtil.showViewWhen;
 
 @EFragment(R.layout.fragment_recipe_video)
 public class RecipeStepVideoFragment extends ViewLifecycleFragment {
+
+    @FragmentArg
+    RecipeStep recipeStep;
 
     @ViewById(R.id.player)
     ExoPlayerView playerView;
@@ -37,7 +40,7 @@ public class RecipeStepVideoFragment extends ViewLifecycleFragment {
     @AfterViews
     void onViewInjected() {
         setupPlayer();
-        subscribeForSelection();
+        bindRecipeStep();
     }
 
     private void setupPlayer() {
@@ -55,15 +58,11 @@ public class RecipeStepVideoFragment extends ViewLifecycleFragment {
         );
     }
 
-    private void subscribeForSelection() {
-        final RecipeStepViewModel recipeStepViewModel = ViewModelProviders.of(requireActivity())
-                .get(RecipeStepViewModel.class);
-        recipeStepViewModel.getSelected().observe(getViewLifecycleOwner(), step -> {
-            if (step == null) return;
+    private void bindRecipeStep() {
+        if (recipeStep == null) return;
 
-            description.setText(step.getFullDescription());
-            showViewWhen(playerView, !isEmpty(step.getVideoUrl()));
-            playerView.play(step.getVideoUrl());
-        });
+        description.setText(recipeStep.getFullDescription());
+        showViewWhen(playerView, !isEmpty(recipeStep.getVideoUrl()));
+        playerView.play(recipeStep.getVideoUrl());
     }
 }

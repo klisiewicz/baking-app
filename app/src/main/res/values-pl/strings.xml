@@ -4,7 +4,7 @@
     <string name="recipes">Przepisy</string>
     <string name="ingredients">Składniki</string>
     <string name="steps">Kroki</string>
-    <string name="step_number">Kror %1$d</string>
+    <string name="recipe_step_title">%1$s: Krok %2$d</string>
     <string name="measure_cup">szklanka</string>
     <string name="measure_tablespoon">łyżka</string>
     <string name="measure_teaspoon">łyżeczka</string>

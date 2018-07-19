@@ -4,7 +4,7 @@
     <string name="recipes">Recipes</string>
     <string name="ingredients">Ingredients</string>
     <string name="steps">Steps</string>
-    <string name="step_number">Step %1$d</string>
+    <string name="recipe_step_title">%1$s: Step %2$d</string>
     <string name="measure_cup">cup</string>
     <string name="measure_tablespoon">tablespoon</string>
     <string name="measure_teaspoon">teaspoon</string>

@@ -17,7 +17,7 @@ public class RecipeStepsAdapter extends RecyclerViewAdapterBase<RecipeStep, Reci
 
     @FunctionalInterface
     public interface RecipeStepClickListener {
-        void onRecipeStepSelected(final RecipeStep recipeStep);
+        void onRecipeStepSelected(final RecipeStep recipeStep, int position);
     }
 
     @RootContext
@@ -41,7 +41,8 @@ public class RecipeStepsAdapter extends RecyclerViewAdapterBase<RecipeStep, Reci
                 step.getShortDescription()
         ));
         recipeStepView.setOnClickListener(v -> {
-            if (recipeStepClickListener != null) recipeStepClickListener.onRecipeStepSelected(step);
+            if (recipeStepClickListener != null)
+                recipeStepClickListener.onRecipeStepSelected(step, position);
         });
     }
 
